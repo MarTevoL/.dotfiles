@@ -1,28 +1,69 @@
-#!/bin/sh
+#!/bin/bash
 
-PERCENTAGE="$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)"
-CHARGING="$(pmset -g batt | grep 'AC Power')"
+source "$CONFIG_DIR/colors.sh"
 
-if [ "$PERCENTAGE" = "" ]; then
-  exit 0
-fi
+render_item() {
 
-case "${PERCENTAGE}" in
-  9[0-9]|100) ICON=""
+  PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+  CHARGING=$(pmset -g batt | grep 'AC Power')
+  CHARGING_STATUS="Not charging"
+
+  if [ $PERCENTAGE = "" ]; then
+    exit 0
+  fi
+
+  COLOR=$LABEL_COLOR
+
+  case ${PERCENTAGE} in
+  9[0-9] | 100)
+    ICON="􀛨"
+    ;;
+  [6-8][0-9])
+    ICON="􀺸"
+    ;;
+  [3-5][0-9])
+    ICON="􀺶"
+    ;;
+  [1-2][0-9])
+    ICON="􀛩"
+    ;;
+  *)
+    ICON="􀛪"
+    COLOR=$RED
+    ;;
+  esac
+
+  if [[ $CHARGING != "" ]]; then
+    ICON="􀢋"
+    CHARGING_STATUS="Charging"
+    COLOR=$LABEL_COLOR
+  fi
+
+  sketchybar --set battery icon=$ICON
+
+}
+
+render_popup() {
+  sketchybar --set battery.details label="$PERCENTAGE% (${CHARGING_STATUS})"
+}
+
+update() {
+  render_item
+  render_popup
+}
+
+popup() {
+  sketchybar --set "$NAME" popup.drawing="$1"
+}
+
+case "$SENDER" in
+"routine" | "forced" | "power_source_change")
+  update
   ;;
-  [6-8][0-9]) ICON=""
+"mouse.entered")
+  popup on
   ;;
-  [3-5][0-9]) ICON=""
+"mouse.exited" | "mouse.exited.global")
+  popup off
   ;;
-  [1-2][0-9]) ICON=""
-  ;;
-  *) ICON=""
 esac
-
-if [[ "$CHARGING" != "" ]]; then
-  ICON=""
-fi
-
-# The item invoking this script (name $NAME) will get its icon and label
-# updated with the current battery status
-sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%"
