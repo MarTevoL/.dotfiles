@@ -6,7 +6,7 @@ wifi=(
   "${menu_defaults[@]}"
   script="$PLUGIN_DIR/wifi.sh"
   click_script="$POPUP_CLICK_SCRIPT"
-  label.drawing=off
+  label.drawing=on
   popup.align=right
   updates=when_shown
   update_freq=5

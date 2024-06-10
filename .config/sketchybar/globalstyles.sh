@@ -7,7 +7,7 @@ source "$CONFIG_DIR/icons.sh"
 source "$CONFIG_DIR/colors.sh"
 
 PADDINGS=8
-FONT="JetBrainsMono Nerd Font"
+FONT="CaskaydiaCove Nerd Font"
 
 # Bar Appearance
 bar=(
@@ -15,7 +15,7 @@ bar=(
   position=top
   topmost=off
   sticky=on
-  height=32
+  height=37
   padding_left=$PADDINGS
   padding_right=$PADDINGS
   corner_radius=0
@@ -65,7 +65,7 @@ notification_defaults=(
 )
 
 bracket_defaults=(
-  background.height=24
+  background.height=28
   background.color=$BAR_COLOR
   blur_radius=32
   background.corner_radius=$PADDINGS

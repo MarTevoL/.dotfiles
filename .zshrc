@@ -179,6 +179,12 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # ---- Eza (better ls) -----
 
-alias ls="eza --icons=always --color=always --long --git --no-filesize --no-time --no-user --no-permissions"
+alias ls="eza --icons=always --color=always --long --git --no-filesize --no-time --no-user"
 
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/truongle/.dart-cli-completion/zsh-config.zsh ]] && . /Users/truongle/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
