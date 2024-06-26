@@ -183,8 +183,13 @@ alias ls="eza --icons=always --color=always --long --git --no-filesize --no-time
 
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
+# ---- delete xcode devices ----
+alias rmxcache="sudo ./.RemoveXcodeCache.sh"
+
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/truongle/.dart-cli-completion/zsh-config.zsh ]] && . /Users/truongle/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
+[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh

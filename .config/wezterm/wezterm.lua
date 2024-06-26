@@ -8,7 +8,10 @@ end
 -- setttings
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
-	{ family = "Iosevka Nerd Font", scale = 1.2, weight = "Medium" },
+	{ family = "JetBrains Mono NL", scale = 1.2, weight = "Regular" },
+	{ family = "Fira Code", scale = 1.3, weight = "Light" },
+	{ family = "Iosevka Nerd Font Mono", scale = 1.3, weight = "Medium" },
+	{ family = "Hack Nerd Font Mono", scale = 1.3 },
 	{ family = "FantasqueSansM Nerd Font", scale = 1.3 },
 })
 config.font_size = 16

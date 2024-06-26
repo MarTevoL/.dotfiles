@@ -11,9 +11,30 @@ return {
     vim.opt.termguicolors = true
 
     nvimtree.setup({
+      modified = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+      },
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+        debounce_delay = 50,
+        severity = {
+          min = vim.diagnostic.severity.HINT,
+          max = vim.diagnostic.severity.ERROR,
+        },
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
       view = {
         side = "right",
-        width = 30,
+        width = 45,
       },
       -- change folder arrow icons
       renderer = {
@@ -22,6 +43,12 @@ return {
         },
         icons = {
           git_placement = "signcolumn",
+          modified_placement = "before",
+          diagnostics_placement = "after",
+          padding = " ",
+          show = {
+            modified = true,
+          },
           glyphs = {
             folder = {
               arrow_closed = "", -- arrow when folder is closed
