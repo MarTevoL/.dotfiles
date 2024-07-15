@@ -32,6 +32,18 @@ return {
           },
         },
       },
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<c-d>"] = actions.delete_buffer,
+            },
+            n = {
+              ["<c-d>"] = actions.delete_buffer,
+            },
+          },
+        },
+      },
     })
 
     telescope.load_extension("fzf")
@@ -45,5 +57,6 @@ return {
     -- keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     -- keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+    keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
   end,
 }
