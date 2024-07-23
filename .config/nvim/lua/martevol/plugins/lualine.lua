@@ -1,12 +1,13 @@
 return {
+
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local lualine = require("lualine")
-    local lazy_status = require("lazy.status") -- to configure lazy pending updates count
-
     -- configure lualine with modified theme
     lualine.setup({
+
+      options = { theme = "catppuccin" },
       sections = {
         lualine_b = { "branch", "diff" },
         lualine_c = {
@@ -23,7 +24,8 @@ return {
             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = "[+]", -- Text to show when the file is modified.
+              modified = " ●",
+              -- modified = "[+]", -- Text to show when the file is modified.
               readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
               unnamed = "[No Name]", -- Text to show for unnamed buffers.
               newfile = "[New]", -- Text to show for newly created file before first write
@@ -31,9 +33,6 @@ return {
           },
         },
         lualine_x = {
-          {
-            "buffers",
-          },
           { "encoding" },
           { "filetype" },
         },

@@ -22,7 +22,7 @@ return {
     local luasnip = require("luasnip")
 
     local lspkind = require("lspkind")
-
+    --
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -41,7 +41,9 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<Up>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<Down>"] = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
@@ -56,6 +58,12 @@ return {
         { name = "path" }, -- file system paths
       }),
 
+      -- formatting = {
+      --   format = function(_, vim_item)
+      --     vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+      --     return vim_item
+      --   end,
+      -- },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format({

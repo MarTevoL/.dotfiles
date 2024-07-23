@@ -13,7 +13,7 @@ return {
       })
 
       local keymap = vim.keymap
-      keymap.set("n", "<leader>hp", ":Gitsigns preview_hunk<CR>", {})
+      keymap.set("n", "<leader>ph", ":Gitsigns preview_hunk<CR>", {})
     end,
   },
 }

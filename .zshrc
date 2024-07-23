@@ -171,7 +171,7 @@ _fzf_comprun() {
 
 # ----- Bat (better cat) -----
 
-export BAT_THEME=tokyonight_night
+# export BAT_THEME=tokyonight_night
 
 # ---- Zoxide (better cd) ----
 
@@ -186,6 +186,11 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # ---- delete xcode devices ----
 alias rmxcache="sudo ./.RemoveXcodeCache.sh"
 
+# --------
+alias cl="clear"
+
+alias fvf="fvm flutter"
+
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/truongle/.dart-cli-completion/zsh-config.zsh ]] && . /Users/truongle/.dart-cli-completion/zsh-config.zsh || true
@@ -193,3 +198,5 @@ alias rmxcache="sudo ./.RemoveXcodeCache.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
 [[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"

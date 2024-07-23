@@ -19,6 +19,8 @@ return {
         desc = "Grep current buffer",
       },
       { "<leader>fc", "<cmd>FzfLua highlights<cr>", desc = "Highlights" },
+      { "<leader>fr", "<cmd>FzfLua lsp_references<cr>", desc = "Show references" },
+      { "<leader>fi", "<cmd>FzfLua lsp_implementations<cr>", desc = "Show implementations" },
       { "<leader>fd", "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "Document diagnostics" },
       { "<leader>fD", "<cmd>FzfLua lsp_workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
       { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
