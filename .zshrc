@@ -189,6 +189,8 @@ alias rmxcache="sudo ./.RemoveXcodeCache.sh"
 # --------
 alias cl="clear"
 
+alias n="nvim"
+
 alias fvf="fvm flutter"
 
 ## [Completion]
