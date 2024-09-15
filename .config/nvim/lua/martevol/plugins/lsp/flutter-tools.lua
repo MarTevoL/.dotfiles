@@ -17,6 +17,9 @@ return {
           virtual_text_str = "■", -- the virtual text character to highlight
         },
       },
+      debugger = { -- integrate with nvim dap + install dart code debugger
+        enabled = true,
+      },
     })
   end,
 }

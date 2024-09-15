@@ -8,13 +8,13 @@ end
 -- setttings
 config.color_scheme = "Catppuccin Mocha" -- or Macchiato, Frappe, Latte, Mocha
 config.font = wezterm.font_with_fallback({
-	{ family = "JetBrains Mono", scale = 1.2, weight = "Regular" },
+	{ family = "JetBrains Mono", scale = 1.0, weight = "Medium" },
 	{ family = "Fira Code", scale = 1.3, weight = "Light" },
 	{ family = "Iosevka Nerd Font Mono", scale = 1.3, weight = "Medium" },
 	{ family = "Hack Nerd Font Mono", scale = 1.3 },
 	{ family = "FantasqueSansM Nerd Font", scale = 1.3 },
 })
-config.font_size = 15
+config.font_size = 16
 
 config.enable_tab_bar = false
 
@@ -25,10 +25,10 @@ config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
 config.window_padding = {
-	left = 10,
-	right = 10,
-	top = 10,
-	bottom = 10,
+	left = 2,
+	right = 2,
+	top = 2,
+	bottom = 2,
 }
 -- Dim inactive panes
 config.inactive_pane_hsb = {

@@ -33,8 +33,8 @@ return {
         },
       },
       view = {
-        side = "right",
-        width = 45,
+        side = "left",
+        width = 50,
       },
       -- change folder arrow icons
       renderer = {

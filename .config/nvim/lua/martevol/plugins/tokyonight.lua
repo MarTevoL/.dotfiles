@@ -4,7 +4,7 @@ return {
   priority = 1000,
   opts = { style = "day" },
 
-  config = function()
-    vim.cmd.colorscheme("tokyonight-night")
-  end,
+  -- config = function()
+  --   vim.cmd.colorscheme("tokyonight-night")
+  -- end,
 }
