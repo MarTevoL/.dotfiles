@@ -8,7 +8,7 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs,nix-homebrew, }:
   let
     configuration = { pkgs,config, ... }: {
 
@@ -19,23 +19,60 @@
       environment.systemPackages =
         [ 
           pkgs.neovim
-          pkgs.mkalias
           pkgs.tmux
+          pkgs.mkalias
+          pkgs.alacritty
+          pkgs.ripgrep
+          pkgs.zoxide
         ];
 
       homebrew = {
         enable = true;
         casks = [
+        "nikitabobko/tap/aerospace"
+        "wezterm"
         "hammerspoon"
+        "firefox"
         "iina"
+        # "sf-symbols"
         ];
-
+        brews = [
+        "ca-certificates"
+        "openssl@3"
+        "libssh2"
+        "libgit2"
+        "oniguruma"
+        "brotli"
+        "c-ares"
+        "libyaml"
+        "ruby"
+        "cocoapods"
+        "eza"
+        "bat"
+        "fd"
+        "ncurses"
+        "pcre2"
+        "fzf"
+        "icu4c"
+        "jq"
+        "libevent"
+        "libnghttp2"
+        "libuv"
+        "lua"
+        "node"
+        "powerlevel10k"
+        "stow"
+        "utf8proc"
+        "tmux"
+        "tree"
+        "yazi"
+        "leoafarias/fvm/fvm"
+        ];
         onActivation.cleanup = "zap";
-
       };
 
       fonts.packages = [
-        (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
+       (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"];})
       ];
 
       system.activationScripts.applications.text = let

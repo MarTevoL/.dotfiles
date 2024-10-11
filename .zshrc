@@ -96,13 +96,16 @@ alias ls="eza --icons=always --color=always --long --git --no-filesize --no-time
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # ---- delete xcode devices ----
-alias rmxcache="sudo ./.RemoveXcodeCache.sh"
+alias rmxcache="sudo ./.bin/removeXcodeCache.sh"
+
+# obsidian
+alias oo='cd $HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/MartVault'
+alias op='nvim $HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/MartVault'
+alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/MartVault/inbox/*.md'
 
 # --------
 alias cl="clear"
-
 alias n="nvim"
-
 alias fvf="fvm flutter"
 
 ## [Completion]
@@ -117,3 +120,6 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 export FLUTTER_PATH="$HOME/fvm/default/bin/flutter"
 export DART_PATH="$HOME/fvm/default/bin/dart"
+
+export PATH=~/.bin:$PATH
+export PATH=~/.bin/on:$PATH
