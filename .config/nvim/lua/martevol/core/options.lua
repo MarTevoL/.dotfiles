@@ -1,7 +1,7 @@
 vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
-
+-- opt.winbar = "%=%m %f"
 opt.relativenumber = true
 opt.number = true
 
@@ -29,6 +29,7 @@ opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or 
 
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+-- opt.clipboard:append("unnamed")
 
 -- split windows
 opt.splitright = true -- split vertical window to the right

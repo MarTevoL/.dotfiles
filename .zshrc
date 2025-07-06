@@ -123,3 +123,4 @@ export DART_PATH="$HOME/fvm/default/bin/dart"
 
 export PATH=~/.bin:$PATH
 export PATH=~/.bin/on:$PATH
+export PATH="/opt/homebrew/bin:$PATH"

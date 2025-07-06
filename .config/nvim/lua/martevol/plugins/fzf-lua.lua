@@ -25,7 +25,8 @@ return {
       { "<leader>fD", "<cmd>FzfLua lsp_workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
       { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
       { "<leader>fg", "<cmd>FzfLua live_grep_glob<cr>", desc = "Grep" },
-      -- { "<leader>fv", "<cmd>FzfLua grep_visual<cr>", desc = "Grep current select word", mode = "x" },
+      { "<leader>fv", "<cmd>FzfLua grep_visual<cr>", desc = "Grep current select word", mode = "x" },
+      { "<leader>fl", "<cmd>FzfLua grep_last<cr>", desc = "Grep last" },
       { "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help" },
     },
     config = function()

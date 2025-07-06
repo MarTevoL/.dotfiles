@@ -4,10 +4,10 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/lazydev.nvim" },
+    -- { "folke/neodev.nvim", enable = false, opts = {} },
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require("lspconfig")
 
     -- import mason_lspconfig plugin
@@ -17,12 +17,10 @@ return {
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     local keymap = vim.keymap -- for conciseness
-
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
         -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
 
         -- set keybinds
@@ -77,7 +75,6 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-
     mason_lspconfig.setup_handlers({
       -- default handler for installed servers
       function(server_name)
@@ -103,5 +100,27 @@ return {
         })
       end,
     })
+    -- setting rounded border for floating window when 'hover' and diagnostic
+    local _border = "rounded"
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      border = _border,
+    })
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = _border,
+    })
+
+    vim.diagnostic.config({
+      float = { border = _border },
+    })
+    require("lspconfig.ui.windows").default_options = {
+      border = _border,
+    }
+
+    -- setup for ufo plugin
+    -- capabilities.textDocument.foldingRange = {
+    --   dynamicRegistration = false,
+    --   lineFoldingOnly = true,
+    -- }
   end,
 }

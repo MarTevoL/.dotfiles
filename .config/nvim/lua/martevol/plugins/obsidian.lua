@@ -72,8 +72,8 @@ return {
     vim.opt.conceallevel = 2
 
     -- checkbox
-    vim.keymap.set("n", "<leader>ty", [[:s/\[\s\]/[x]/<cr>]], { silent = true, desc = "checkbox toggle" })
-    vim.keymap.set("n", "<leader>tu", [[:s/\[x\]/[ ]/<cr>]], { silent = true, desc = "checkbox untoggle" })
+    vim.keymap.set("n", "<leader>cy", [[:s/\[\s\]/[x]/<cr>]], { silent = true, desc = "checkbox toggle" })
+    vim.keymap.set("n", "<leader>cu", [[:s/\[x\]/[ ]/<cr>]], { silent = true, desc = "checkbox untoggle" })
 
     -- navigate to vault
     vim.keymap.set(

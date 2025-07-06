@@ -1,3 +1,3 @@
 return {
-  "autolyticus/hot-reload.vim",
+  -- "autolyticus/hot-reload.vim",
 }

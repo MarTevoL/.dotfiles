@@ -11,8 +11,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ {import = "martevol.plugins" },{import = "martevol.plugins.lsp"} },{
- change_detection = {
-    notify = false,
- },
-})
+require("lazy").setup(
+  { { import = "martevol.plugins" }, { import = "martevol.plugins.lsp" }, { import = "martevol.plugins.neoscroll" } },
+  {
+    change_detection = {
+      notify = false,
+    },
+  }
+)
