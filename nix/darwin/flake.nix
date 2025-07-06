@@ -2,8 +2,8 @@
   description = "Mart Darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
-    nix-darwin.url = "github:LnL7/nix-darwin-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
@@ -68,7 +68,7 @@
         "yazi"
         "leoafarias/fvm/fvm"
         ];
-        onActivation.cleanup = "zap";
+        # onActivation.cleanup = "zap";
       };
 
       fonts.packages = [
