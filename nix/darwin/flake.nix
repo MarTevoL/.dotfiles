@@ -6,25 +6,9 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
-    # Optional: Declarative tap management
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs,nix-homebrew, homebrew-core,
-    homebrew-cask,
-    homebrew-bundle,}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
   let
     configuration = { pkgs,config, ... }: {
 
@@ -32,71 +16,81 @@
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-          pkgs.neovim
-          pkgs.tmux
-          pkgs.mkalias
-          pkgs.alacritty
-          pkgs.ripgrep
-          pkgs.zoxide
-        ];
+      # environment.systemPackages =
+      #   [ 
+      #     pkgs.neovim
+      #     pkgs.mkalias
+      #     pkgs.tmux
+      #   ];
+      #
+      # homebrew = {
+      #   enable = true;
+      #   casks = [
+      #   "hammerspoon"
+      #   "iina"
+      #   ];
+      #
+      #   onActivation.cleanup = "zap";
+      #
+      # };
 
-      homebrew = {
-        enable = true;
-        casks = [
-        "nikitabobko/tap/aerospace"
-        "wezterm"
-        "hammerspoon"
-        "firefox"
-        "iina"
-        # "sf-symbols"
-        ];
-        brews = [
+    environment.systemPackages =
+      [ 
+      pkgs.aerospace
+      pkgs.neovim
+        pkgs.tmux
+        pkgs.mkalias
+        pkgs.alacritty
+        pkgs.ripgrep
+        pkgs.zoxide
+      ];
+
+    homebrew = {
+      enable = true;
+      casks = [
+          "wezterm"
+          "hammerspoon"
+          "firefox"
+          "iina"
+# "sf-symbols"
+      ];
+      brews = [
         "ca-certificates"
-        "openssl@3"
-        "libssh2"
-        "libgit2"
-        "oniguruma"
-        "brotli"
-        "c-ares"
-        "libyaml"
-        "ruby"
-        "cocoapods"
-        "eza"
-        "bat"
-        "fd"
-        "ncurses"
-        "pcre2"
-        "fzf"
-        "icu4c"
-        "jq"
-        "libevent"
-        "libnghttp2"
-        "libuv"
-        "lua"
-        "node"
-        "powerlevel10k"
-        "stow"
-        "utf8proc"
-        "tmux"
-        "tree"
-        "yazi"
-        "leoafarias/fvm/fvm"
-        ];
-        onActivation = {
-          autoUpdate = true;
-          # cleanup = "zap"; # Uninstall packages/casks not in Brewfile
-            upgrade = true;
-        };
-
-        global = {
-          brewfile = true;
-        };
-      };
+          "openssl@3"
+          "libssh2"
+          "libgit2"
+          "oniguruma"
+          "brotli"
+          "c-ares"
+          "libyaml"
+          "ruby"
+          "cocoapods"
+          "eza"
+          "bat"
+          "fd"
+          "ncurses"
+          "pcre2"
+          "fzf"
+          "icu4c"
+          "jq"
+          "libevent"
+          "libnghttp2"
+          "libuv"
+          "lua"
+          "node"
+          "powerlevel10k"
+          "stow"
+          "utf8proc"
+          "tmux"
+          "tree"
+          "yazi"
+          # "leoafarias/fvm/fvm"
+          ];
+      onActivation.cleanup = "zap";
+    };
 
       fonts.packages = [
-       (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"];})
+        (pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; })
       ];
 
       system.activationScripts.applications.text = let
@@ -151,6 +145,7 @@
         {
           nix-homebrew = {
             enable = true;
+
             # Apple Silicon Only
             enableRosetta = true;
 
@@ -159,11 +154,6 @@
 
             # Automatically migrate existing Homebrew installations
             autoMigrate = true;
-            taps = {
-              "homebrew/homebrew-core" = homebrew-core;
-              "homebrew/homebrew-cask" = homebrew-cask;
-              "homebrew/homebrew-bundle" = homebrew-bundle;
-            };
           };
         }
       ];
