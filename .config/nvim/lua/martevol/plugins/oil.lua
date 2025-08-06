@@ -3,7 +3,17 @@ return {
   opts = {},
   -- Optional dependencies
   dependencies = { "echasnovski/mini.icons" },
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  -- keys = {
+  --   {
+  --     "<leader>sf",
+  --     function()
+  --       require("oil").toggle_float()
+  --       vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", "<CMD>lua require('oil').close()<CR>", { silent = true })
+  --     end,
+  --     desc = "Oil open float",
+  --     silent = true,
+  --   },
+  -- }, -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   config = function()
     require("oil").setup({
       default_file_explorer = true,
@@ -13,9 +23,6 @@ return {
       },
     })
     -- Open parent directory in current window
-    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
-    -- Open parent directory in floating window
-    vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Oil open parent directory" })
   end,
 }

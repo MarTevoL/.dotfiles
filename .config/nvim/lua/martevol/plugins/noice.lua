@@ -1,11 +1,12 @@
 return {
   "folke/noice.nvim",
+  enabled = false,
   event = "VeryLazy",
-  opts = {
-    presets = {
-      lsp_doc_border = true,
-    },
-  },
+  -- opts = {
+  --   presets = {
+  --     lsp_doc_border = true,
+  --   },
+  -- },
 
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -19,9 +20,15 @@ return {
   config = function()
     require("noice").setup({
       routes = {
+        -- this option can show macro event on the notification window
+        -- {
+        --   view = "notify",
+        --   filter = { event = "msg_showmode" },
+        -- },
         {
           filter = { event = "notify", find = "No information available" },
-          opts = { skip = true },
+          -- opts = { skip = true },
+          view = "mini",
         },
         {
           filter = {
@@ -56,8 +63,15 @@ return {
           -- override cmp documentation with Noice (needs the other options to work)
           ["cmp.entry.get_documentation"] = true,
         },
-        hover = { enabled = false }, -- <-- HERE!
-        signature = { enabled = false }, -- <-- HERE!
+        hover = { enabled = false },
+        signature = { enabled = false },
+      },
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
     })
     -- See: https://github.com/folke/noice.nvim/issues/258

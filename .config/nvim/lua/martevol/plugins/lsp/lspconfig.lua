@@ -51,11 +51,11 @@ return {
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
-        opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-        opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+        -- opts.desc = "Go to previous diagnostic"
+        -- keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+        --
+        -- opts.desc = "Go to next diagnostic"
+        -- keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
         opts.desc = "Show documentation for what is under cursor"
         keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -68,54 +68,64 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-    mason_lspconfig.setup_handlers({
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end,
-    })
+    -- mason_lspconfig.setup_handlers({
+    --   -- default handler for installed servers
+    --   function(server_name)
+    --     lspconfig[server_name].setup({
+    --       capabilities = capabilities,
+    --     })
+    --   end,
+    --   ["lua_ls"] = function()
+    --     -- configure lua server (with special settings)
+    --     lspconfig["lua_ls"].setup({
+    --       capabilities = capabilities,
+    --       settings = {
+    --         Lua = {
+    --           -- make the language server recognize "vim" global
+    --           diagnostics = {
+    --             globals = { "vim" },
+    --           },
+    --           completion = {
+    --             callSnippet = "Replace",
+    --           },
+    --         },
+    --       },
+    --     })
+    --   end,
+    -- })
+
     -- setting rounded border for floating window when 'hover' and diagnostic
     local _border = "rounded"
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({
       border = _border,
+      width = 10,
+      height = 10,
     })
 
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({
       border = _border,
+      width = 10,
+      height = 10,
     })
 
     vim.diagnostic.config({
+      -- floating text only next to current line
+      virtual_text = { current_line = true },
+
+      -- Change the Diagnostic symbols in the sign column (gutter)
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.INFO] = "󰠠 ",
+          [vim.diagnostic.severity.HINT] = " ",
+        },
+      },
+      underline = true,
       float = { border = _border },
     })
-    require("lspconfig.ui.windows").default_options = {
-      border = _border,
-    }
+
+    require("lspconfig.ui.windows").default_options.border = _border
 
     -- setup for ufo plugin
     -- capabilities.textDocument.foldingRange = {

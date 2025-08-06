@@ -4,6 +4,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local lualine = require("lualine")
+    -- local noice = require("noice")
     -- configure lualine with modified theme
     lualine.setup({
 
@@ -15,7 +16,8 @@ return {
             "filename",
             file_status = true, -- Displays file status (readonly status, modified status)
             newfile_status = false, -- Display new file status (new file means no write after created)
-            path = 0, -- 0: Just the filename
+            path = 3,
+            -- 0: Just the filename
             -- 1: Relative path
             -- 2: Absolute path
             -- 3: Absolute path, with tilde as the home directory
@@ -31,6 +33,11 @@ return {
               newfile = "[New]", -- Text to show for newly created file before first write
             },
           },
+          -- {
+          --   noice.api.statusline.mode.get,
+          --   cond = noice.api.statusline.mode.has,
+          --   color = { fg = "#ff9e64" },
+          -- },
         },
         lualine_x = {
           { "encoding" },

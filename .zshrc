@@ -60,6 +60,7 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+source ~/fzf-git.sh/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -92,6 +93,8 @@ eval "$(zoxide init --cmd cd zsh)"
 # ---- Eza (better ls) -----
 
 alias ls="eza --icons=always --color=always --long --git --no-filesize --no-time --no-user"
+alias lsa="eza -a --icons=always --color=always --grid --git --no-filesize --no-time --no-user"
+alias lst="eza -a --icons=always --color=always --tree --level=3 --git --no-filesize --no-time --no-user"
 
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -104,19 +107,38 @@ alias op='nvim $HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Mart
 alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/MartVault/inbox/*.md'
 
 # --------
+
+alias gst="git status"
+alias glo="git log --oneline"
+alias h="~"
 alias cl="clear"
 alias n="nvim"
-alias fvf="fvm flutter"
+alias fl="fvm flutter"
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/truongle/.dart-cli-completion/zsh-config.zsh ]] && . /Users/truongle/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+# export env var for Yazi
+export EDITOR="nvim"
+
+# Shell wrapper for Yazi, use y instead of yazi
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
 [[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
 
+export PATH=$HOME/Development/flutter/bin:$PATH
+export PATH=$HOME/.gem/bin:$PATH
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+
 
 export FLUTTER_PATH="$HOME/fvm/default/bin/flutter"
 export DART_PATH="$HOME/fvm/default/bin/dart"
@@ -124,3 +146,5 @@ export DART_PATH="$HOME/fvm/default/bin/dart"
 export PATH=~/.bin:$PATH
 export PATH=~/.bin/on:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

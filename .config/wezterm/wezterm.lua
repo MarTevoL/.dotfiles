@@ -14,10 +14,13 @@ config.font = wezterm.font_with_fallback({
 	{ family = "Hack Nerd Font Mono", scale = 1.3 },
 	{ family = "FantasqueSansM Nerd Font", scale = 1.3 },
 })
-config.font_size = 16
-config.line_height = 1.15
+config.font_size = 15
+config.line_height = 1
 
 config.enable_tab_bar = false
+
+-- turn off sound
+config.audible_bell = "Disabled"
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.80
