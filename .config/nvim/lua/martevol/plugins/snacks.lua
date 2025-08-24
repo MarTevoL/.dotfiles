@@ -1,3 +1,107 @@
+vim.g.snacks_animate = false
+
+local excluded = {
+  "node_modules/",
+  "dist/",
+  ".next/",
+  ".vite/",
+  ".git/",
+  ".gitlab/",
+  "build/",
+  "target/",
+  "dadbod_ui/tmp/",
+  "dadbod_ui/dev/",
+
+  "package-lock.json",
+  "lazy-lock.json",
+  "pnpm-lock.yaml",
+  "yarn.lock",
+}
+
+local root_patterns = {
+  -- directories
+  "client",
+  "server",
+
+  -- version control systems
+  "_darcs",
+  ".hg",
+  ".bzr",
+  ".svn",
+  ".git",
+
+  -- build tools
+  "Makefile",
+  "CMakeLists.txt",
+  "build.gradle",
+  "build.gradle.kts",
+  "pom.xml",
+  "build.xml",
+
+  -- docker
+  "Dockerfile",
+  "docker-compose.yml",
+
+  -- node.js and javascript
+  "package.json",
+  "package-lock.json",
+  "yarn.lock",
+  ".nvmrc",
+  "gulpfile.js",
+  "Gruntfile.js",
+
+  -- python
+  "requirements.txt",
+  "Pipfile",
+  "pyproject.toml",
+  "setup.py",
+  "tox.ini",
+
+  -- rust
+  "Cargo.toml",
+
+  -- go
+  "go.mod",
+
+  -- elixir
+  "mix.exs",
+
+  -- configuration files
+  ".prettierrc",
+  ".prettierrc.json",
+  ".prettierrc.yaml",
+  ".prettierrc.yml",
+  ".eslintrc",
+  ".eslintrc.json",
+  ".eslintrc.js",
+  ".eslintrc.cjs",
+  ".eslintignore",
+  ".stylelintrc",
+  ".stylelintrc.json",
+  ".stylelintrc.yaml",
+  ".stylelintrc.yml",
+  ".editorconfig",
+  ".gitignore",
+
+  -- html projects
+  "index.html",
+
+  -- miscellaneous
+  "README.md",
+  "README.rst",
+  "LICENSE",
+  "Vagrantfile",
+  "Procfile",
+  ".env",
+  ".env.example",
+  "config.yaml",
+  "config.yml",
+  ".terraform",
+  "terraform.tfstate",
+  ".kitchen.yml",
+  "Berksfile",
+}
+vim.g.root_spec = { "lsp", root_patterns, "cwd" }
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -15,6 +119,29 @@ return {
     },
     picker = {
       enabled = true,
+      sources = {
+        projects = {
+          dev = {
+            "~/.dotfiles",
+            "~/Development",
+            "~/Development/side_projects",
+            "~/Development/flutter_projects",
+          },
+          patterns = root_patterns,
+          -- <leader>fp will always open picker_files
+          confirm = "picker_files",
+        },
+        files = {
+          hidden = true,
+          ignored = true,
+        },
+      },
+      -- show hidden files like .env
+      hidden = true,
+      -- show files ignored by git like node_modules
+      ignored = true,
+
+      exclude = excluded,
       layout = {
         -- presets options : "default" , "ivy" , "ivy-split" , "telescope" , "vscode", "select" , "sidebar"
         -- override picker layout in keymaps function as a param below
@@ -58,6 +185,13 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>fp",
+      function()
+        Snacks.picker.projects()
+      end,
+      desc = "Projects",
+    },
     {
       "<leader>ff",
       function()
